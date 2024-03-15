@@ -1,0 +1,25 @@
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  job-test:
+    uses: ./.github/workflows/script.yml
+    with:
+      environmentType: Test
+    secrets:
+      AZURE_CLIENT_ID: client_id
+      AZURE_TENANT_ID: tenant_id
+      AZURE_SUBSCRIPTION_ID: subscription_id
+
+  job-production:
+    uses: ./.github/workflows/script.yml
+    with:
+      environmentType: Production
+    secrets:
+      AZURE_CLIENT_ID: client_id
+      AZURE_TENANT_ID: tenant_id
+      AZURE_SUBSCRIPTION_ID: subscription_id
