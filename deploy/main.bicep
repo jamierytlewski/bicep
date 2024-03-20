@@ -19,7 +19,7 @@ module storageAcct 'storage.bicep' = {
   scope: newRG
   params: {
     storageLocation: newRG.location
-    storageName: 'stor-${resourceGroupName}-${environmentType}'
+    storageName: 'stor${toLower(resourceGroupName)}${environmentType}'
   }
 }
 
