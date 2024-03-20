@@ -36,23 +36,23 @@ module hostingPlan 'hostingPlan.bicep' = {
   }
 }
 
-module functionApp 'function.bicep' = {
-  name: 'functionAppModule'
-  scope: newRG
-  params: {
-    location: newRG.location
-    functionAppName: 'fn-${resourceGroupName}-${environmentType}'
-  }
-}
+// module functionApp 'function.bicep' = {
+//   name: 'functionAppModule'
+//   scope: newRG
+//   params: {
+//     location: newRG.location
+//     functionAppName: 'fn-${resourceGroupName}-${environmentType}'
+//   }
+// }
 
-module appConfiguration 'appconfiguration.bicep' = {
-  name: 'appConfigurationModule'
-  scope: newRG
-  params: {
-    appConfigurationName: 'appconfig-${resourceGroupName}-${environmentType}'
-    location: newRG.location
-  }
-}
+// module appConfiguration 'appconfiguration.bicep' = {
+//   name: 'appConfigurationModule'
+//   scope: newRG
+//   params: {
+//     appConfigurationName: 'appconfig-${resourceGroupName}-${environmentType}'
+//     location: newRG.location
+//   }
+// }
 
 // @description('The location into which your Azure resources should be deployed.')
 // param location string = resourceGroup().location
