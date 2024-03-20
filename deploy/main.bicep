@@ -23,6 +23,37 @@ module storageAcct 'storage.bicep' = {
   }
 }
 
+module hostingPlan 'hostingPlan.bicep' = {
+  name: 'hostingPlanModule'
+  scope: newRG
+  params: {
+    appServicePlanName: 'asp-${resourceGroupName}-fn-${environmentType}'
+    location: newRG.location
+    sku: {
+      name: 'Y1'
+      capacity: 1
+    }
+  }
+}
+
+module functionApp 'function.bicep' = {
+  name: 'functionAppModule'
+  scope: newRG
+  params: {
+    location: newRG.location
+    functionAppName: 'fn-${resourceGroupName}-${environmentType}'
+  }
+}
+
+module appConfiguration 'appconfiguration.bicep' = {
+  name: 'appConfigurationModule'
+  scope: newRG
+  params: {
+    appConfigurationName: 'appconfig-${resourceGroupName}-${environmentType}'
+    location: newRG.location
+  }
+}
+
 // @description('The location into which your Azure resources should be deployed.')
 // param location string = resourceGroup().location
 
@@ -39,40 +70,8 @@ module storageAcct 'storage.bicep' = {
 // var applicationInsightsName = 'toywebsite'
 // var storageAccountName = 'mystorage${resourceNameSuffix}'
 
-// // Define the SKUs for each component based on the environment type.
-// var environmentConfigurationMap = {
-//   Production: {
-//     appServicePlan: {
-//       sku: {
-//         name: 'S1'
-//         capacity: 1
-//       }
-//     }
-//     storageAccount: {
-//       sku: {
-//         name: 'Standard_LRS'
-//       }
-//     }
-//   }
-//   Test: {
-//     appServicePlan: {
-//       sku: {
-//         name: 'F1'
-//       }
-//     }
-//     storageAccount: {
-//       sku: {
-//         name: 'Standard_GRS'
-//       }
-//     }
-//   }
-// }
+// Define the SKUs for each component based on the environment type.
 
-// resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
-//   name: appServicePlanName
-//   location: location
-//   sku: environmentConfigurationMap[environmentType].appServicePlan.sku
-// }
 
 // resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
 //   name: appServiceAppName
