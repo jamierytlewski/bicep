@@ -26,7 +26,7 @@ param tags object = {
 }
 
 resource configStore 'Microsoft.AppConfiguration/configurationStores@2023-03-01' = {
-  name: appConfigurationName
+  name: toLower(appConfigurationName)
   location: location
   sku: {
     name: 'standard'

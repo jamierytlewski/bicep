@@ -36,14 +36,14 @@ module hostingPlan 'hostingPlan.bicep' = {
   }
 }
 
-// module functionApp 'function.bicep' = {
-//   name: 'functionAppModule'
-//   scope: newRG
-//   params: {
-//     location: newRG.location
-//     functionAppName: 'fn-${resourceGroupName}-${environmentType}'
-//   }
-// }
+module functionApp 'function.bicep' = {
+  name: 'functionAppModule'
+  scope: newRG
+  params: {
+    location: newRG.location
+    functionAppName: 'fn-${resourceGroupName}-${environmentType}'
+  }
+}
 
 // module appConfiguration 'appconfiguration.bicep' = {
 //   name: 'appConfigurationModule'

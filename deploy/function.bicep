@@ -3,7 +3,7 @@ param functionAppName string
 param location string
 
 resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
-  name: functionAppName
+  name: toLower(functionAppName)
   location: location
   kind: 'functionapp'
   properties: {
