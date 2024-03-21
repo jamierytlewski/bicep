@@ -6,18 +6,26 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
   name: toLower(functionAppName)
   location: location
   kind: 'functionapp'
+
   properties: {
     siteConfig: {
       appSettings: [
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'node'
+          value: 'dotnet-isolated'
         }
         {
-          name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '14.17.0'
+          name: 'FUNCTIONS_EXTENSION_VERSION'
+          value: '~4'
+        }
+        {
+          name: 'WEBSITE_RUN_FROM_PACKAGE'
+          value: '1'
         }
       ]
+      http20Enabled: true
     }
+    httpsOnly: true
+    
   }
 }
