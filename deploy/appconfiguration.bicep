@@ -31,6 +31,9 @@ resource configStore 'Microsoft.AppConfiguration/configurationStores@2023-03-01'
   sku: {
     name: 'standard'
   }
+  identity: {
+    type: 'SystemAssigned'
+  }
 }
 
 resource configStoreKeyValue 'Microsoft.AppConfiguration/configurationStores/keyValues@2023-03-01' = [for (item, i) in keyValueNames: {

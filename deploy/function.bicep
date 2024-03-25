@@ -26,6 +26,8 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
       http20Enabled: true
     }
     httpsOnly: true
-    
+  }
+  identity: {
+    type: 'SystemAssigned'
   }
 }
