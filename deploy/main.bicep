@@ -36,15 +36,6 @@ module hostingPlan 'hostingPlan.bicep' = {
   }
 }
 
-module functionApp 'function.bicep' = {
-  name: 'functionAppModule'
-  scope: newRG
-  params: {
-    location: newRG.location
-    functionAppName: 'fn-${resourceGroupName}-${environmentType}'
-  }
-}
-
 module appConfiguration 'appconfiguration.bicep' = {
   name: 'appConfigurationModule'
   scope: newRG
@@ -53,3 +44,15 @@ module appConfiguration 'appconfiguration.bicep' = {
     location: newRG.location
   }
 }
+
+module functionApp 'function.bicep' = {
+  name: 'functionAppModule'
+  scope: newRG
+  params: {
+    location: newRG.location
+    functionAppName: 'fn-${resourceGroupName}-${environmentType}'
+    appConfigurationId: appConfiguration.outputs.appConfigurationId
+  }
+}
+
+

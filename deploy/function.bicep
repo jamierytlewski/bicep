@@ -1,6 +1,7 @@
 
 param functionAppName string
 param location string
+param appConfigurationId string
 
 resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
   name: toLower(functionAppName)
@@ -29,5 +30,13 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
   }
   identity: {
     type: 'SystemAssigned'
+  }
+}
+
+resource symbolicname 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: 'App Configuration Data Reader'
+  properties: {
+    roleDefinitionId: appConfigurationId
+    principalId: functionApp.identity.principalId
   }
 }

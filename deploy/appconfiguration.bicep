@@ -31,9 +31,6 @@ resource configStore 'Microsoft.AppConfiguration/configurationStores@2023-03-01'
   sku: {
     name: 'standard'
   }
-  identity: {
-    type: 'SystemAssigned'
-  }
 }
 
 resource configStoreKeyValue 'Microsoft.AppConfiguration/configurationStores/keyValues@2023-03-01' = [for (item, i) in keyValueNames: {
@@ -46,5 +43,10 @@ resource configStoreKeyValue 'Microsoft.AppConfiguration/configurationStores/key
   }
 }]
 
+
+
+
+
 output reference_key_value_value string = configStoreKeyValue[0].properties.value
+output appConfigurationId string = configStore.id
 // output reference_key_value_object object = configStoreKeyValue[1]
